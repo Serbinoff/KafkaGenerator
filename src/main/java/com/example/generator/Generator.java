@@ -12,14 +12,14 @@ public class Generator {
 
 	protected static Logger logger;
 	protected static Producer<String,String> kafkaProducer;
-	
+
 	public static void main (String[] args) {
 		logger = LoggerFactory.getLogger(Generator.class);
 
 		KafkaConfig config = new KafkaConfig();
 		kafkaProducer = new KafkaProducer<>(config.getKafkaProps());
 
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < Integer.parseInt(args[0]); i++) {
 			String message = MessageService.getMessageData();
 			ProducerRecord<String, String> producerRecord = new ProducerRecord<>("oldKafkaTopic", message);
 
