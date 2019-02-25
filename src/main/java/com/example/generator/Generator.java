@@ -19,7 +19,9 @@ public class Generator {
 		KafkaConfig config = new KafkaConfig();
 		kafkaProducer = new KafkaProducer<>(config.getKafkaProps());
 
-		for (int i = 0; i < Integer.parseInt(args[0]); i++) {
+		int messages = args.length > 0 ? Integer.parseInt(args[0]):10;
+
+		for (int i = 0; i < messages; i++) {
 			String message = MessageService.getMessageData();
 			ProducerRecord<String, String> producerRecord = new ProducerRecord<>("oldKafkaTopic", message);
 
